@@ -3,23 +3,15 @@ fn main() {
 }
 
 fn solve(chars: &[char], dictionary: Vec<String>) -> Vec<String> {
-    let mut words = Vec::new();
-    for word in dictionary {
-        if check_chars(chars, &word) {
-            words.push(word)
-        }
-    }
-    words
+    dictionary
+        .into_iter()
+        .filter(|word| check_chars(chars, &word))
+        .collect()
 }
 
 /// Returns whether all characters in `word` are contained in `chars`.
 fn check_chars(chars: &[char], word: &str) -> bool {
-    for c in word.chars() {
-        if !chars.contains(&c) {
-            return false;
-        }
-    }
-    true
+    word.chars().all(|c| chars.contains(&c))
 }
 
 #[cfg(test)]
