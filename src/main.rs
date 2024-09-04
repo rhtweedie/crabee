@@ -29,6 +29,7 @@ fn solve(chars: &[char], centre_char: char, dictionary: &[&str]) -> Vec<String> 
 
 /// Returns whether all characters in `word` are contained in `chars`.
 fn check_word(chars: &[char], centre_char: char, word: &str) -> bool {
+    let word = word.to_lowercase();
     word.chars().all(|c| chars.contains(&c)) && word.contains(centre_char) && word.len() > 3
 }
 
