@@ -22,14 +22,14 @@ fn main() {
 fn solve(chars: &[char], centre_char: char, dictionary: &[&str]) -> Vec<String> {
     dictionary
         .into_iter()
-        .filter(|word| check_chars(chars, centre_char, word))
+        .filter(|word| check_word(chars, centre_char, word))
         .map(|word| word.to_string())
         .collect()
 }
 
 /// Returns whether all characters in `word` are contained in `chars`.
-fn check_chars(chars: &[char], centre_char: char, word: &str) -> bool {
-    word.chars().all(|c| chars.contains(&c)) && word.contains(centre_char)
+fn check_word(chars: &[char], centre_char: char, word: &str) -> bool {
+    word.chars().all(|c| chars.contains(&c)) && word.contains(centre_char) && word.len() > 3
 }
 
 #[cfg(test)]
