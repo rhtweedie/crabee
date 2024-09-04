@@ -12,25 +12,25 @@ fn main() {
     let chars: Vec<char> = args[2].chars().collect();
     let dict_str = read_to_string(&args[1]).expect("Error reading dictionary.");
     let dict: Vec<&str> = dict_str.lines().collect();
-    let results = solve(&chars, chars[0], &dict);
+    let results = solve(&chars, chars[0], 4, &dict);
     // Output results
     for result in results {
         println!("{}", result)
     }
 }
 
-fn solve(chars: &[char], centre_char: char, dictionary: &[&str]) -> Vec<String> {
+fn solve(chars: &[char], centre_char: char, min_len: usize, dictionary: &[&str]) -> Vec<String> {
     dictionary
         .into_iter()
-        .filter(|word| check_word(chars, centre_char, word))
+        .filter(|word| check_word(chars, centre_char, min_len, word))
         .map(|word| word.to_string())
         .collect()
 }
 
 /// Returns whether all characters in `word` are contained in `chars`.
-fn check_word(chars: &[char], centre_char: char, word: &str) -> bool {
+fn check_word(chars: &[char], centre_char: char, min_len: usize, word: &str) -> bool {
     let word = word.to_lowercase();
-    word.chars().all(|c| chars.contains(&c)) && word.contains(centre_char) && word.len() > 3
+    word.chars().all(|c| chars.contains(&c)) && word.contains(centre_char) && word.len() >= min_len
 }
 
 #[cfg(test)]
@@ -43,6 +43,7 @@ mod tests {
             solve(
                 &['f', 'o', 'c', 'e'],
                 'f',
+                4,
                 &["foo", "fooo", "bar", "coffee"]
             ),
             vec!["fooo", "coffee"]
