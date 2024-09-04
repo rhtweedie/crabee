@@ -5,7 +5,7 @@ fn main() {
 fn solve(chars: &[char], dictionary: Vec<String>) -> Vec<String> {
     dictionary
         .into_iter()
-        .filter(|word| check_chars(chars, &word))
+        .filter(|word| check_chars(chars, word))
         .collect()
 }
 
