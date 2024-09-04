@@ -43,9 +43,9 @@ mod tests {
             solve(
                 &['f', 'o', 'c', 'e'],
                 'f',
-                vec!["foo".to_string(), "bar".to_string(), "coffee".to_string()]
+                &["foo", "fooo", "bar", "coffee"]
             ),
-            vec!["foo", "coffee"]
+            vec!["fooo", "coffee"]
         );
     }
 }
